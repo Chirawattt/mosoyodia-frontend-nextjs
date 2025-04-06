@@ -23,6 +23,10 @@ const ibmPlexSansThai = IBM_Plex_Sans_Thai({
 export const metadata = {
   title: "Moso-Yodia ร้านให้เช่าชุดคาเฟ่และบาร์",
   description: "ร้านให้เช่าชุดญี่ปุ่นในบรรยากาศคาเฟ่และบาร์",
+  icons: {
+    icon: [{ url: "/favicon.ico", sizes: "any" }, { url: "/RoundedLogo.png" }],
+    apple: [{ url: "/RoundedLogo.png" }],
+  },
 };
 
 export default function RootLayout({ children }) {
