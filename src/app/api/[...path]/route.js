@@ -12,7 +12,9 @@ export async function GET(request, context) {
 
     // สร้าง URL สำหรับเรียก API
     const url = new URL(request.url);
-    const targetUrl = `${API_BASE_URL}/api/${pathString}${url.search}`;
+    // Trim any whitespace to avoid URL parsing errors
+    const baseUrl = API_BASE_URL.trim();
+    const targetUrl = `${baseUrl}/api/${pathString}${url.search}`;
 
     console.log(`Proxying request to: ${targetUrl}`);
 
@@ -34,7 +36,7 @@ export async function GET(request, context) {
   } catch (error) {
     console.error("API proxy error:", error);
     return NextResponse.json(
-      { error: "Failed to fetch data from API" },
+      { error: `Failed to fetch data from API: ${error.message}` },
       { status: 500 }
     );
   }
