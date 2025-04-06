@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
+import Link from "next/link";
 import CostumeDetail from "../../components/CostumeDetail";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -131,12 +132,12 @@ export default function CostumePage() {
       ) : error ? (
         <div className="container-custom mx-auto py-20 text-center">
           <p className="text-lg text-red-500">{error}</p>
-          <a
+          <Link
             href="/costumes"
             className="inline-block mt-6 bg-primary hover:bg-primary/90 text-white py-3 px-6 rounded-md transition"
           >
             กลับไปยังรายการชุด
-          </a>
+          </Link>
         </div>
       ) : (
         <CostumeDetail costume={costume} />
