@@ -50,27 +50,6 @@ export default function FeaturedCostumes() {
         setFeaturedCostumes(formattedData);
       } catch (error) {
         console.error("Error fetching featured costumes:", error);
-        // ถ้ามีข้อผิดพลาด แสดงชุดตัวอย่างแทน
-        setFeaturedCostumes([
-          {
-            id: "costume1",
-            name: "กิโมโนฟุริโซเดะสีแดง",
-            category: "กิโมโน",
-            description:
-              "กิโมโนฟุริโซเดะสีแดงหรูหราพร้อมลวดลายดอกไม้ เหมาะสำหรับโอกาสทางการ",
-            image: "/images/costumes/kimono1.jpg",
-            status: "available",
-          },
-          {
-            id: "costume2",
-            name: "ยูกาตะสำหรับเทศกาลฤดูร้อน",
-            category: "ยูกาตะ",
-            description:
-              "ยูกาตะสีฟ้าอ่อนพร้อมลวดลายแบบดั้งเดิม เหมาะสำหรับเทศกาลฤดูร้อน",
-            image: "/images/costumes/yukata1.jpg",
-            status: "available",
-          },
-        ]);
       } finally {
         setLoading(false);
       }
