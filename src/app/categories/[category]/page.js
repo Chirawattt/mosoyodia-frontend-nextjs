@@ -63,17 +63,29 @@ export default function CategoryPage() {
             // ตรวจสอบว่า costume มีค่าหรือไม่
             if (!costume) return null;
 
+            // ตรวจสอบรูปแบบของ image_path ว่าเป็น URL ของ Cloudinary หรือไม่
+            let imageUrl;
+            if (costume.image_path) {
+              if (costume.image_path.includes("cloudinary.com")) {
+                // ถ้าเป็น URL ของ Cloudinary ใช้มันเลย
+                imageUrl = costume.image_path;
+              } else {
+                // ถ้าไม่ใช่ ใช้รูปแบบเดิม
+                imageUrl = `${API_BASE_URL}/uploads/${costume.image_path.replace(
+                  /^uploads\//,
+                  ""
+                )}`;
+              }
+            } else {
+              imageUrl = "/images/costumes/placeholder.jpg";
+            }
+
             return {
               id: costume.id ? costume.id.toString() : "",
               name: costume.name || "ไม่ระบุชื่อ",
               category: categoryMapping[costume.category] || "อื่นๆ",
               description: costume.description || "ไม่มีคำอธิบาย",
-              image: costume.image_path
-                ? `${API_BASE_URL}/uploads/${costume.image_path.replace(
-                    /^uploads\//,
-                    ""
-                  )}`
-                : "/images/costumes/placeholder.jpg",
+              image: imageUrl,
               status: costume.status === 1 ? "available" : "booked",
               isRentable: costume.isRentable || false,
               ageGroup: ageGroupMapping[costume.age_group] || "ไม่ระบุ",

@@ -5,6 +5,7 @@ const nextConfig = {
       "localhost",
       "maps.googleapis.com",
       "mosoyodia-backend-costume-rental.onrender.com",
+      "res.cloudinary.com",
     ],
   },
   devIndicators: false,

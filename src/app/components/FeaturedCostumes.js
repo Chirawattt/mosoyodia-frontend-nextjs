@@ -34,18 +34,30 @@ export default function FeaturedCostumes() {
         const formattedData = data
           .filter((costume) => costume.status === 1)
           .slice(0, 4)
-          .map((costume) => ({
-            id: costume.id.toString(),
-            name: costume.name,
-            category: categoryMapping[costume.category] || "อื่นๆ",
-            description: costume.description,
-            image: costume.image_path
-              ? `${API_BASE_URL}/${costume.image_path}`
-              : "/images/costumes/placeholder.jpg",
-            status: costume.status === 1 ? "available" : "booked",
-          }));
+          .map((costume) => {
+            // ตรวจสอบรูปแบบของ image_path ว่าเป็น URL ของ Cloudinary หรือไม่
+            let imageUrl;
+            if (costume.image_path) {
+              if (costume.image_path.includes("cloudinary.com")) {
+                // ถ้าเป็น URL ของ Cloudinary ใช้มันเลย
+                imageUrl = costume.image_path;
+              } else {
+                // ถ้าไม่ใช่ ใช้รูปแบบเดิม
+                imageUrl = `${API_BASE_URL}/${costume.image_path}`;
+              }
+            } else {
+              imageUrl = "/images/costumes/placeholder.jpg";
+            }
 
-        console.log(formattedData);
+            return {
+              id: costume.id.toString(),
+              name: costume.name,
+              category: categoryMapping[costume.category] || "อื่นๆ",
+              description: costume.description,
+              image: imageUrl,
+              status: costume.status === 1 ? "available" : "booked",
+            };
+          });
 
         setFeaturedCostumes(formattedData);
       } catch (error) {
@@ -95,49 +107,48 @@ export default function FeaturedCostumes() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="bg-[#e5e0d5] rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow"
               >
-                <div className="relative aspect-[3/4] overflow-hidden">
-                  <Image
-                    src={costume.image}
-                    alt={costume.name}
-                    fill
-                    className="object-cover transition-transform duration-500 hover:scale-105"
-                  />
-                  <div className="absolute top-3 right-3">
-                    <span
-                      className={`inline-block py-1 px-3 rounded-full text-xs font-medium text-white ${
-                        costume.status === "available"
-                          ? "bg-green-500"
-                          : "bg-red-500"
-                      }`}
-                    >
-                      {costume.status === "available" ? "ว่าง" : "จองแล้ว"}
-                    </span>
+                <Link href={`/costumes/${costume.id}`} className="block">
+                  <div className="relative aspect-[3/4] overflow-hidden">
+                    <Image
+                      src={costume.image}
+                      alt={costume.name}
+                      fill
+                      className="object-cover transition-transform duration-500 hover:scale-105"
+                    />
+                    <div className="absolute top-3 right-3">
+                      <span
+                        className={`inline-block py-1 px-3 rounded-full text-xs font-medium text-white ${
+                          costume.status === "available"
+                            ? "bg-green-500"
+                            : "bg-red-500"
+                        }`}
+                      >
+                        {costume.status === "available" ? "ว่าง" : "จองแล้ว"}
+                      </span>
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                      <span className="inline-block py-1 px-2 rounded text-xs text-white bg-[#8a7967]/80 mb-1">
+                        {costume.category}
+                      </span>
+                      <h3 className="text-white font-bold truncate">
+                        {costume.name}
+                      </h3>
+                    </div>
                   </div>
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                    <span className="inline-block py-1 px-2 rounded text-xs text-white bg-[#8a7967]/80 mb-1">
-                      {costume.category}
-                    </span>
-                    <h3 className="text-white font-bold truncate">
-                      {costume.name}
-                    </h3>
+                  <div className="p-4">
+                    <p className="text-sm text-[#4a4039]/80 mb-3 line-clamp-2">
+                      {costume.description}
+                    </p>
+                    <div className="flex justify-between items-center">
+                      <span className="text-xs text-[#8a7967] font-medium bg-[#8a7967]/10 px-2 py-1 rounded">
+                        ค่าเช่า 250 บาท
+                      </span>
+                      <span className="text-sm font-medium text-[#8a7967] hover:underline">
+                        ดูรายละเอียด
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <div className="p-4">
-                  <p className="text-sm text-[#4a4039]/80 mb-3 line-clamp-2">
-                    {costume.description}
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <span className="text-xs text-[#8a7967] font-medium bg-[#8a7967]/10 px-2 py-1 rounded">
-                      ค่าเช่า 250 บาท
-                    </span>
-                    <Link
-                      href={`/costumes/${costume.id}`}
-                      className="text-sm font-medium text-[#8a7967] hover:underline"
-                    >
-                      ดูรายละเอียด
-                    </Link>
-                  </div>
-                </div>
+                </Link>
               </motion.div>
             ))}
           </div>

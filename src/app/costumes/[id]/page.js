@@ -51,6 +51,37 @@ export default function CostumePage() {
         }
 
         // แปลงข้อมูลให้เข้ากับรูปแบบของ component CostumeDetail
+        let mainImageUrl;
+        if (costumeData.image_path) {
+          if (costumeData.image_path.includes("cloudinary.com")) {
+            // ถ้าเป็น URL ของ Cloudinary ใช้มันเลย
+            mainImageUrl = costumeData.image_path;
+          } else {
+            // ถ้าไม่ใช่ ใช้รูปแบบเดิม
+            mainImageUrl = `${API_BASE_URL}/uploads/${costumeData.image_path.replace(
+              /^uploads\//,
+              ""
+            )}`;
+          }
+        } else {
+          mainImageUrl = "/images/costumes/placeholder.jpg";
+        }
+
+        // แปลง URL รูปภาพสำหรับรูปรีวิว
+        const reviewImages = reviewImagesData.slice(0, 3).map((img) => {
+          if (img.image_path) {
+            if (img.image_path.includes("cloudinary.com")) {
+              return img.image_path;
+            } else {
+              return `${API_BASE_URL}/uploads/${img.image_path.replace(
+                /^uploads\//,
+                ""
+              )}`;
+            }
+          }
+          return "/images/costumes/placeholder.jpg";
+        });
+
         const formattedCostume = {
           id: costumeData.id.toString(),
           name: costumeData.name,
@@ -59,22 +90,7 @@ export default function CostumePage() {
           longDescription:
             costumeData.long_description || costumeData.description,
           images: costumeData.image_path
-            ? [
-                `${API_BASE_URL}/uploads/${costumeData.image_path.replace(
-                  /^uploads\//,
-                  ""
-                )}`,
-                // ใช้รูปจากการรีวิวเพิ่มเติม (ถ้ามี)
-                ...reviewImagesData
-                  .slice(0, 3)
-                  .map(
-                    (img) =>
-                      `${API_BASE_URL}/uploads/${img.image_path.replace(
-                        /^uploads\//,
-                        ""
-                      )}`
-                  ),
-              ]
+            ? [mainImageUrl, ...reviewImages]
             : ["/images/costumes/placeholder.jpg"],
           rentalPrice: "250 บาท",
           rentalPeriod: "4 ชั่วโมง",

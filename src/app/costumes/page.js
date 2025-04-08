@@ -53,17 +53,29 @@ export default function CostumesPage() {
             // ตรวจสอบว่า costume มีค่าหรือไม่
             if (!costume) return null;
 
+            // ตรวจสอบรูปแบบของ image_path ว่าเป็น URL ของ Cloudinary หรือไม่
+            let imageUrl;
+            if (costume.image_path) {
+              if (costume.image_path.includes("cloudinary.com")) {
+                // ถ้าเป็น URL ของ Cloudinary ใช้มันเลย
+                imageUrl = costume.image_path;
+              } else {
+                // ถ้าไม่ใช่ ใช้รูปแบบเดิม
+                imageUrl = `${API_BASE_URL}/uploads/${costume.image_path.replace(
+                  /^uploads\//,
+                  ""
+                )}`;
+              }
+            } else {
+              imageUrl = "/images/costumes/placeholder.jpg";
+            }
+
             return {
               id: costume.id ? costume.id.toString() : "",
               name: costume.name || "ไม่ระบุชื่อ",
               category: categoryMapping[costume.category] || "อื่นๆ",
               description: costume.description || "ไม่มีคำอธิบาย",
-              image: costume.image_path
-                ? `${API_BASE_URL}/uploads/${costume.image_path.replace(
-                    /^uploads\//,
-                    ""
-                  )}`
-                : "/images/costumes/placeholder.jpg",
+              image: imageUrl,
               status: costume.status === 1 ? "available" : "booked",
               isRentable: costume.isRentable || false,
               ageGroup: ageGroupMapping[costume.age_group] || "ไม่ระบุ",
@@ -272,7 +284,7 @@ export default function CostumesPage() {
 
                 <button
                   onClick={resetFilters}
-                  className="flex items-center gap-1 py-2 px-4 bg-[#e74c3c]/10 text-[#e74c3c] rounded-md hover:bg-[#e74c3c]/20 transition-colors border border-[#e74c3c]/30 font-medium shadow-sm hover:shadow"
+                  className="flex items-center gap-1 h-[53px] px-6 bg-[#e74c3c]/10 text-[#e74c3c] rounded-md hover:bg-[#e74c3c]/20 transition-colors border border-[#e74c3c]/30 font-medium shadow-sm hover:shadow"
                 >
                   <FiX className="stroke-2" />
                   รีเซ็ตตัวกรอง
@@ -362,26 +374,35 @@ export default function CostumesPage() {
             </p>
             <div className="flex flex-wrap gap-2">
               {filters.category !== "all" && (
-                <span className="inline-flex items-center gap-1 py-1 px-3 bg-primary/10 text-primary rounded-full text-sm">
+                <span className="inline-flex items-center gap-1.5 py-1.5 px-4 bg-[#8a7967]/10 text-[#8a7967] rounded-full text-sm font-medium border border-[#8a7967]/20 shadow-sm">
                   {filters.category}
-                  <button onClick={() => handleFilterChange("category", "all")}>
-                    <FiX size={14} />
+                  <button
+                    onClick={() => handleFilterChange("category", "all")}
+                    className="hover:bg-[#8a7967]/20 rounded-full p-0.5 transition-colors"
+                  >
+                    <FiX size={14} className="stroke-[2.5]" />
                   </button>
                 </span>
               )}
               {filters.status !== "all" && (
-                <span className="inline-flex items-center gap-1 py-1 px-3 bg-primary/10 text-primary rounded-full text-sm">
+                <span className="inline-flex items-center gap-1.5 py-1.5 px-4 bg-[#8a7967]/10 text-[#8a7967] rounded-full text-sm font-medium border border-[#8a7967]/20 shadow-sm">
                   {filters.status === "available" ? "ว่าง" : "จองแล้ว"}
-                  <button onClick={() => handleFilterChange("status", "all")}>
-                    <FiX size={14} />
+                  <button
+                    onClick={() => handleFilterChange("status", "all")}
+                    className="hover:bg-[#8a7967]/20 rounded-full p-0.5 transition-colors"
+                  >
+                    <FiX size={14} className="stroke-[2.5]" />
                   </button>
                 </span>
               )}
               {filters.ageGroup !== "all" && (
-                <span className="inline-flex items-center gap-1 py-1 px-3 bg-primary/10 text-primary rounded-full text-sm">
+                <span className="inline-flex items-center gap-1.5 py-1.5 px-4 bg-[#8a7967]/10 text-[#8a7967] rounded-full text-sm font-medium border border-[#8a7967]/20 shadow-sm">
                   {filters.ageGroup}
-                  <button onClick={() => handleFilterChange("ageGroup", "all")}>
-                    <FiX size={14} />
+                  <button
+                    onClick={() => handleFilterChange("ageGroup", "all")}
+                    className="hover:bg-[#8a7967]/20 rounded-full p-0.5 transition-colors"
+                  >
+                    <FiX size={14} className="stroke-[2.5]" />
                   </button>
                 </span>
               )}

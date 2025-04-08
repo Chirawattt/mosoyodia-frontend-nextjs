@@ -338,7 +338,7 @@ export default function CostumeDetail({ costume }) {
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="/costumes"
-                className="border-2 border-primary hover:bg-primary/10 text-primary py-3 px-6 rounded-md transition flex-1 text-center font-medium"
+                className="border-2 border-primary hover:bg-primary/10 text-primary py-3 px-6 rounded-md transition flex-1 text-center font-medium flex items-center justify-center"
               >
                 ดูชุดเพิ่มเติม
               </Link>
