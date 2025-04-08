@@ -284,7 +284,7 @@ export default function CostumesPage() {
 
                 <button
                   onClick={resetFilters}
-                  className="flex items-center gap-1 h-[53px] px-6 bg-[#e74c3c]/10 text-[#e74c3c] rounded-md hover:bg-[#e74c3c]/20 transition-colors border border-[#e74c3c]/30 font-medium shadow-sm hover:shadow"
+                  className="flex items-center gap-1 h-[56px] px-6 bg-[#e74c3c]/10 text-[#e74c3c] rounded-md hover:bg-[#e74c3c]/20 transition-colors border border-[#e74c3c]/30 font-medium shadow-sm hover:shadow"
                 >
                   <FiX className="stroke-2" />
                   รีเซ็ตตัวกรอง
@@ -374,37 +374,31 @@ export default function CostumesPage() {
             </p>
             <div className="flex flex-wrap gap-2">
               {filters.category !== "all" && (
-                <span className="inline-flex items-center gap-1.5 py-1.5 px-4 bg-[#8a7967]/10 text-[#8a7967] rounded-full text-sm font-medium border border-[#8a7967]/20 shadow-sm">
+                <button
+                  onClick={() => handleFilterChange("category", "all")}
+                  className="inline-flex items-center gap-1.5 py-1.5 px-4 bg-[#8a7967]/10 text-[#8a7967] text-sm font-medium border border-[#8a7967]/20 shadow-sm hover:bg-[#8a7967]/20 rounded-full p-0.5 transition-colors"
+                >
                   {filters.category}
-                  <button
-                    onClick={() => handleFilterChange("category", "all")}
-                    className="hover:bg-[#8a7967]/20 rounded-full p-0.5 transition-colors"
-                  >
-                    <FiX size={14} className="stroke-[2.5]" />
-                  </button>
-                </span>
+                  <FiX size={14} className="stroke-[2.5]" />
+                </button>
               )}
               {filters.status !== "all" && (
-                <span className="inline-flex items-center gap-1.5 py-1.5 px-4 bg-[#8a7967]/10 text-[#8a7967] rounded-full text-sm font-medium border border-[#8a7967]/20 shadow-sm">
+                <button
+                  onClick={() => handleFilterChange("status", "all")}
+                  className="inline-flex items-center gap-1.5 py-1.5 px-4 bg-[#8a7967]/10 text-[#8a7967] text-sm font-medium border border-[#8a7967]/20 shadow-sm hover:bg-[#8a7967]/20 rounded-full p-0.5 transition-colors"
+                >
                   {filters.status === "available" ? "ว่าง" : "จองแล้ว"}
-                  <button
-                    onClick={() => handleFilterChange("status", "all")}
-                    className="hover:bg-[#8a7967]/20 rounded-full p-0.5 transition-colors"
-                  >
-                    <FiX size={14} className="stroke-[2.5]" />
-                  </button>
-                </span>
+                  <FiX size={14} className="stroke-[2.5]" />
+                </button>
               )}
               {filters.ageGroup !== "all" && (
-                <span className="inline-flex items-center gap-1.5 py-1.5 px-4 bg-[#8a7967]/10 text-[#8a7967] rounded-full text-sm font-medium border border-[#8a7967]/20 shadow-sm">
+                <button
+                  onClick={() => handleFilterChange("ageGroup", "all")}
+                  className="inline-flex items-center gap-1.5 py-1.5 px-4 bg-[#8a7967]/10 text-[#8a7967] text-sm font-medium border border-[#8a7967]/20 shadow-sm hover:bg-[#8a7967]/20 rounded-full p-0.5 transition-colors"
+                >
                   {filters.ageGroup}
-                  <button
-                    onClick={() => handleFilterChange("ageGroup", "all")}
-                    className="hover:bg-[#8a7967]/20 rounded-full p-0.5 transition-colors"
-                  >
-                    <FiX size={14} className="stroke-[2.5]" />
-                  </button>
-                </span>
+                  <FiX size={14} className="stroke-[2.5]" />
+                </button>
               )}
             </div>
           </div>
@@ -476,7 +470,7 @@ export default function CostumesPage() {
               <p className="text-lg mb-4">ไม่พบชุดที่ตรงกับตัวกรองของคุณ</p>
               <button
                 onClick={resetFilters}
-                className="inline-flex items-center justify-center gap-2 py-2.5 px-6 text-white bg-[#e74c3c] rounded-md hover:bg-[#c0392b] transition-colors shadow-md font-medium"
+                className="inline-flex items-center justify-center gap-2 py-2.5 px-6 bg-[#e74c3c]/10 text-[#e74c3c] rounded-md hover:bg-[#e74c3c]/20 transition-colors border border-[#e74c3c]/30 font-medium shadow-sm hover:shadow"
               >
                 <FiX className="stroke-2" />
                 รีเซ็ตตัวกรอง

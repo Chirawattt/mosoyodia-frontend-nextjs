@@ -264,7 +264,7 @@ export default function CategoryPage() {
 
                 <button
                   onClick={resetFilters}
-                  className="py-3 px-4 bg-[#e74c3c] text-white rounded-md hover:bg-[#c0392b] transition-colors shadow-md font-medium flex items-center gap-2"
+                  className="flex items-center gap-1 h-[56px] px-6 bg-[#e74c3c]/10 text-[#e74c3c] rounded-md hover:bg-[#e74c3c]/20 transition-colors border border-[#e74c3c]/30 font-medium shadow-sm hover:shadow"
                 >
                   <FiX className="stroke-2" />
                   รีเซ็ตตัวกรอง
@@ -320,7 +320,7 @@ export default function CategoryPage() {
 
                     <button
                       onClick={resetFilters}
-                      className="w-full py-2.5 text-center flex items-center justify-center gap-2 text-white bg-[#e74c3c] rounded-md hover:bg-[#c0392b] transition-colors shadow-md font-medium"
+                      className="w-full py-2.5 text-center flex items-center justify-center gap-2 bg-[#e74c3c]/10 text-[#e74c3c] rounded-md hover:bg-[#e74c3c]/20 transition-colors border border-[#e74c3c]/30 font-medium shadow-sm hover:shadow"
                     >
                       <FiX className="stroke-2" />
                       รีเซ็ตตัวกรอง
@@ -340,20 +340,22 @@ export default function CategoryPage() {
             </p>
             <div className="flex flex-wrap gap-2">
               {filters.status !== "all" && (
-                <span className="inline-flex items-center gap-1 py-1 px-3 bg-primary/10 text-primary rounded-full text-sm">
+                <button
+                  onClick={() => handleFilterChange("status", "all")}
+                  className="inline-flex items-center gap-1.5 py-1.5 px-4 bg-[#8a7967]/10 text-[#8a7967] text-sm font-medium border border-[#8a7967]/20 shadow-sm hover:bg-[#8a7967]/20 rounded-full p-0.5 transition-colors"
+                >
                   {filters.status === "available" ? "ว่าง" : "จองแล้ว"}
-                  <button onClick={() => handleFilterChange("status", "all")}>
-                    <FiX size={14} />
-                  </button>
-                </span>
+                  <FiX size={14} className="stroke-[2.5]" />
+                </button>
               )}
               {filters.ageGroup !== "all" && (
-                <span className="inline-flex items-center gap-1 py-1 px-3 bg-primary/10 text-primary rounded-full text-sm">
+                <button
+                  onClick={() => handleFilterChange("ageGroup", "all")}
+                  className="inline-flex items-center gap-1.5 py-1.5 px-4 bg-[#8a7967]/10 text-[#8a7967] text-sm font-medium border border-[#8a7967]/20 shadow-sm hover:bg-[#8a7967]/20 rounded-full p-0.5 transition-colors"
+                >
                   {filters.ageGroup}
-                  <button onClick={() => handleFilterChange("ageGroup", "all")}>
-                    <FiX size={14} />
-                  </button>
-                </span>
+                  <FiX size={14} className="stroke-[2.5]" />
+                </button>
               )}
             </div>
           </div>
@@ -422,7 +424,7 @@ export default function CategoryPage() {
               </p>
               <button
                 onClick={resetFilters}
-                className="inline-flex items-center justify-center gap-2 py-2.5 px-6 text-white bg-[#e74c3c] rounded-md hover:bg-[#c0392b] transition-colors shadow-md font-medium"
+                className="inline-flex items-center justify-center gap-2 py-2.5 px-6 bg-[#e74c3c]/10 text-[#e74c3c] rounded-md hover:bg-[#e74c3c]/20 transition-colors border border-[#e74c3c]/30 font-medium shadow-sm hover:shadow"
               >
                 <FiX className="stroke-2" />
                 รีเซ็ตตัวกรอง
