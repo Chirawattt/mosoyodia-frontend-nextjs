@@ -136,9 +136,6 @@ export default function FeaturedCostumes() {
                     </div>
                   </div>
                   <div className="p-4">
-                    <p className="text-sm text-[#4a4039]/80 mb-3 line-clamp-2">
-                      {costume.description}
-                    </p>
                     <div className="flex justify-between items-center">
                       <span className="text-xs text-[#8a7967] font-medium bg-[#8a7967]/10 px-2 py-1 rounded">
                         ค่าเช่า 250 บาท
