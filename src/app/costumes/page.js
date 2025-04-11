@@ -165,7 +165,7 @@ export default function CostumesPage() {
 
           <div className="bg-[#e5e0d5] rounded-lg p-6 shadow-lg mb-10 text-center text-[#4a4039] border-2 border-[#e74c3c] transform hover:scale-[1.01] transition-transform">
             <div className="flex justify-center mb-3">
-              <span className="bg-[#e74c3c] text-white px-4 py-1.5 rounded-full font-medium inline-block -mt-10 shadow-md text-sm">
+              <span className="bg-[#e74c3c] text-white px-4 py-1.5 rounded-full font-medium -mt-10 shadow-md text-sm flex items-center">
                 ข้อมูลสำคัญ
               </span>
             </div>
